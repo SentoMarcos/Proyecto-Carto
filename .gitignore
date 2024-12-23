@@ -1,0 +1,53 @@
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Compiled source
+dist/
+build/
+*.map
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test coverage
+coverage/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Static files
+*.css.map
+*.js.map
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git hooks
+.hooks/
