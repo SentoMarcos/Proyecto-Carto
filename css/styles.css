@@ -1,15 +1,70 @@
 
-
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'IBM Plex Mono', monospace;
     background-color: #1a1a1a;
     color: white;
     overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Header Styles */
+.light-theme {
+    background-color: #f0f0f0;
+    color: #1a1a1a;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg') no-repeat center center/cover;
+    text-align: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+}
+
+.hero-content a {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    background-color: #00d4ff;
+    color: #1a1a1a;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.hero-content a:hover {
+    background-color: #009ecc;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -23,6 +78,14 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: white !important;
+}
+
 header .logo {
     font-size: 1.5rem;
     font-weight: bold;
@@ -31,13 +94,13 @@ header .logo {
 
 header nav {
     display: flex;
-    gap: 30px;
+    align-items: center;
+    gap: 20px;
 }
 
 header nav a {
     text-decoration: none;
     color: white;
-    font-size: 1rem;
     transition: color 0.3s ease-in-out;
 }
 
@@ -45,135 +108,45 @@ header nav a:hover {
     color: #00d4ff;
 }
 
-/* Fullscreen Map Section */
-.hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background-image: url('https://via.placeholder.com/1920x1080'); /* Replace with your map image */
-    background-size: cover;
-    background-position: center;
+header .theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
 }
 
-.hero .overlay {
-    position: absolute;
-    top: 0;
+.sidebar {
+    position: fixed;
+    top: 60px;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    width: 80px;
+    height: calc(100% - 60px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+    padding: 20px 0;
+    gap: 20px;
+    background: rgba(26, 26, 26, 0.9);
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.hero .overlay h1 {
-    font-size: 4rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: white;
-    margin-bottom: 20px;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
-}
-
-.hero .overlay p {
-    font-size: 1.2rem;
-    color: #d0d0d0;
-    margin-bottom: 20px;
-}
-
-.hero .overlay a {
-    font-size: 1rem;
-    color: #00d4ff;
+.sidebar a {
     text-decoration: none;
-    padding: 10px 20px;
-    border: 1px solid #00d4ff;
-    border-radius: 5px;
-    transition: background 0.3s, color 0.3s;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.hero .overlay a:hover {
+.sidebar a:hover {
     background: #00d4ff;
     color: #1a1a1a;
+    transform: scale(1.1);
 }
 
-/* Projects Section */
-.projects {
-    padding: 50px 20px;
-    background-color: #1a1a1a;
-}
-
-.projects h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-}
-
-.project {
-    display: flex;
-    align-items: center;
-    margin-bottom: 50px;
-    gap: 20px;
-    padding: 20px;
-    background-color: #222;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
-    cursor: pointer;
-    transform-style: preserve-3d;
-}
-
-.project:hover {
-    transform: translateZ(50px) scale(1.1);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
-}
-
-.project img {
-    width: 50%;
-    height: auto;
-    border-radius: 15px;
-    object-fit: cover;
-}
-
-.project-description {
-    flex: 1;
-    text-align: center;
-}
-
-.project-description h3 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-.project-description p {
-    font-size: 1rem;
-    color: #d0d0d0;
-    margin-bottom: 15px;
-}
-
-.project-description a {
-    text-decoration: none;
-    background-color: #00d4ff;
-    color: #1a1a1a;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.project-description a:hover {
-    background-color: #00b2e3;
-}
-
-.project:nth-child(even) {
-    flex-direction: row-reverse;
-}
-
-/* Footer */
 footer {
     text-align: center;
     padding: 20px;
@@ -181,11 +154,63 @@ footer {
     color: #d0d0d0;
 }
 
-footer a {
-    color: #00d4ff;
-    text-decoration: none;
+.light-theme footer {
+    background: #f0f0f0;
+    color: #1a1a1a;
 }
 
-footer a:hover {
-    text-decoration: underline;
+.projects .project img {
+    transition: transform 0.3s ease;
+}
+
+.projects .project img:hover {
+    transform: scale(1.05);
+}
+
+.project-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.project-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.project-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+.project-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 50%;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
