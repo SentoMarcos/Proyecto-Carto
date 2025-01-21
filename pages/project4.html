@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto 3 - Detalles</title>
+    <title>Proyecto 4 - Detalles</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -12,67 +12,132 @@
     <style>
         body {
             font-family: 'IBM Plex Mono', monospace;
-            background-color: #1a1a1a;
+            background-color: rgba(26, 26, 26, 0);
             color: white;
             margin: 0;
             padding: 20px;
+            overflow: hidden;
+        }/* Scrollbar personalizada */
+        /* Scrollbar personalizada */
+        .container::-webkit-scrollbar {
+            width: 12px; /* Ancho de la barra de desplazamiento */
         }
+
+        .container::-webkit-scrollbar-thumb {
+            background: #4CAF50; /* Color del "pulgar" (thumb) */
+            border-radius: 20px; /* Bordes completamente redondeados */
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.6); /* Efecto de flotante con sombra */
+            border: 3px solid rgba(26, 26, 26, 0.9); /* Espacio entre el thumb y el track */
+        }
+
+        .container::-webkit-scrollbar-thumb:hover {
+            background: #4CAF50; /* Color al pasar el mouse */
+            box-shadow: 0 0 15px rgba(0, 156, 204, 0.8); /* Sombra más intensa al hacer hover */
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: rgba(26, 26, 26, 0.9); /* Color del fondo del track */
+            border-radius: 20px; /* Bordes redondeados para el track */
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); /* Sombra interna para mayor profundidad */
+        }
+
+        /* Compatibilidad con otros navegadores */
+        .container {
+            scrollbar-width: thin; /* Hacer la barra más delgada */
+            scrollbar-color: #4CAF50 rgba(26, 26, 26, 0.9); /* Colores para el thumb y track */
+        }
+
+
+
+
         .container {
             max-width: 900px;
             margin: auto;
             background: rgba(26, 26, 26, 0.9);
             border-radius: 10px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
+            overflow: auto;
             max-height: 90vh;
         }
         .header {
-            background-color: #FF5733; /* Naranja vibrante */
-            color: white;
-            padding: 20px;
+            background-color: #4CAF50;
+
+            color: #ffffff;
+            padding: 30px;
             text-align: center;
         }
-        .content {
-            padding: 20px;
-            overflow-y: auto;
-            max-height: 70vh; /* Limita la altura del contenido */
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin: 0;
         }
+
+        .content {
+            padding: 30px;
+            line-height: 1.6;
+        }
+
+        .content img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .content h2 {
+            color: #00910d;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .content ul li {
+            margin-bottom: 10px;
+        }
+
         .footer {
             background: #1a1a1a;
             padding: 15px;
             text-align: center;
             font-size: 0.9rem;
+            color: white;
         }
+
         .footer a {
+            color: #4CAF50;
             text-decoration: none;
             font-weight: bold;
         }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
         .footer .btn {
             margin: 5px;
             font-size: 0.9rem;
             padding: 10px 20px;
             border-radius: 5px;
         }
+
         .footer .btn-secondary {
-            background-color: #FF5733; /* Naranja vibrante */
+            background-color: #4CAF50;
             color: #1a1a1a;
             border: none;
         }
+
         .footer .btn-secondary:hover {
-            background-color: #E64A19; /* Naranja más oscuro al hacer hover */
-        }
-        .footer .btn-primary {
-            background-color: #FFC300; /* Amarillo complementario */
-            color: #1a1a1a;
-            border: none;
-        }
-        .footer .btn-primary:hover {
-            background-color: #FFA500; /* Amarillo dorado al hacer hover */
+            background-color: #009ecc;
         }
         #map {
             height: 400px; /* Altura del mapa */
-            border: 1px solid #FF5733; /* Borde naranja */
+            border: 1px solid #4CAF50; /* Borde verde */
             border-radius: 8px;
+            margin-top: 10px;
         }
         .leaflet-control-layers-expanded {
             background-color: rgba(26, 26, 26, 0.9) !important;
@@ -83,7 +148,7 @@
             bottom: 50px;
             right: 10px;
             z-index: 1000;
-            background: #FF5733;
+            background: #4CAF50; /* Verde característico */
             color: white;
             border: none;
             padding: 8px 16px;
@@ -92,10 +157,8 @@
             cursor: pointer;
         }
         .fullscreen-btn:hover {
-            background: #E64A19;
+            background: #388E3C; /* Verde más oscuro al hacer hover */
         }
-        #map { height: 100vh; }
-
         /* Contenedor del recuadro de vista previa */
         .basemap-preview {
             position: absolute;
@@ -114,7 +177,6 @@
             width: 100%;
             height: 100%;
         }
-
         /* Menú desplegable de estilos de mapa */
         .basemap-menu {
             display: none;
@@ -143,10 +205,11 @@
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <h1>Proyecto 3</h1>
-    </div>
+
     <div class="content">
+        <div class="header">
+            <h1>Proyecto 4</h1>
+        </div>
         <div id="map">
             <!--icono de desplegar no texto-->
             <button id="fullscreen-btn" class="fullscreen-btn"><i class="fas fa-expand"></i></button>
@@ -161,28 +224,65 @@
                 <img src="https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/6/31/23" alt="Satélite" onclick="changeBaseMap('satellite')">
             </div>
         </div>
+        <h2>Análisis Territorial del Hábitat del Lobo</h2>
 
+        <h3>Objetivos</h3>
         <p>
-            Bienvenido a los detalles del Proyecto 3. Este proyecto se centra en el análisis de datos climáticos
-            utilizando herramientas avanzadas para modelar el cambio climático y sus efectos en el entorno global.
+            Identificar zonas idóneas para la creación de un área protegida para el
+            <strong>Lobo Ibérico</strong> en la <strong>Comunidad de Castilla y León</strong>,
+            utilizando herramientas SIG avanzadas. Se busca integrar datos raster y vectoriales para realizar un análisis territorial basado en:
         </p>
-        <p>
-            Características principales:
         <ul>
-            <li>Modelos predictivos de cambios climáticos a gran escala.</li>
-            <li>Análisis de tendencias basadas en datos históricos.</li>
-            <li>Interfaz visual para comprender patrones complejos.</li>
+            <li>Criterios de aptitud ecológica.</li>
+            <li>Densidad poblacional.</li>
+            <li>Superficie mínima.</li>
         </ul>
-        </p>
+
+        <h3>Introducción</h3>
         <p>
-            El Proyecto 3 combina innovación tecnológica con objetivos de sostenibilidad, proporcionando
-            herramientas clave para afrontar los desafíos climáticos del futuro.
+            En esta práctica, se utiliza <strong>QGIS</strong> para combinar diversas variables geográficas y datos estadísticos con el propósito de determinar las áreas más aptas para proteger al Lobo Ibérico.
+            Las variables incluyen:
         </p>
+        <ul>
+            <li>Datos de lluvia media anual.</li>
+            <li>Temperaturas medias anuales.</li>
+            <li>Altitudes específicas.</li>
+        </ul>
+        <p>
+            Además, se establecen condiciones adicionales:
+        </p>
+        <ul>
+            <li>Zonas con valores de aptitud de 3, 4 o 5 (donde 3 es más apto).</li>
+            <li>Municipios con densidad de población menor o igual a 10 hab/km².</li>
+            <li>Superficie mínima de las zonas: 10 km².</li>
+        </ul>
+
+        <h3>Metodología</h3>
+        <p>El desarrollo de esta práctica se divide en los siguientes pasos:</p>
+        <ol>
+            <li><strong>Inicio:</strong> Crear un proyecto QGIS llamado <code>LOBOS</code> y definir el sistema de referencia EPSG:4326.</li>
+            <li><strong>Reclasificación:</strong> Reclasificar capas raster de lluvias, temperaturas y altitudes según criterios de aptitud.</li>
+            <li><strong>Cálculo de aptitud:</strong> Combinar las capas raster usando una suma aritmética para generar un mapa de aptitud.</li>
+            <li><strong>Densidad poblacional:</strong> Filtrar municipios con densidad menor o igual a 10 hab/km².</li>
+            <li><strong>Vectorización:</strong> Transformar capas raster en polígonos y filtrar zonas con valores de aptitud entre 3 y 5.</li>
+            <li><strong>Disolver y calcular áreas:</strong> Generar polígonos finales, calcular su superficie en km² y seleccionar áreas mayores o iguales a 10 km².</li>
+        </ol>
+
+        <h3>Resultado Final</h3>
+        <p>
+            El resultado es un mapa en formato A4 que incluye las zonas válidas para la protección del Lobo Ibérico. El mapa debe contener:
+        </p>
+        <ul>
+            <li>Leyenda indicando los valores de aptitud.</li>
+            <li>Un título descriptivo y el nombre del autor.</li>
+            <li>Una cuadrícula UTM.</li>
+        </ul>
+        <div class="footer">
+            <a href="../assets/Documents/4_ANALISIS_TERRITORIO.pdf" class="btn btn-secondary">Descargar Práctica</a>
+            <a href="../assets/Documents/RESULTADOS_LOBO.pdf" class="btn btn-primary">Descargar Resultados</a>
+        </div>
     </div>
-    <div class="footer">
-        <a href="../assets/Documents/3_TEMATICO_RASTER.pdf" class="btn btn-secondary">Descargar PDF</a>
-        <a href="../assets/Documents/PRECIPITACIONES_TEMPERATURAS_MAPA.pdf" class="btn btn-primary">Descargar mapas</a>
-    </div>
+
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
