@@ -8,21 +8,28 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'IBM Plex Mono', monospace;
-      background-color: #f9f9f9;
-      color: #333;
-      margin: 0;
-      padding: 20px;
-    }
+            font-family: 'Roboto', sans-serif;
+            background-color: #e8f5e900;
+            color: #2e3b2d;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden; /* Oculta el scroll principal */
+        }
 
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: auto; /* Permite scroll interno en la ventana flotante */
+            max-height: 90vh; /* Limita la altura para caber en la ventana */
+            scrollbar-width: none; /* Oculta scrollbar en navegadores compatibles */
+        }
+
+        .container::-webkit-scrollbar {
+            display: none; /* Oculta scrollbar en navegadores basados en WebKit */
+        }
 
     .header {
       background-color: #28a745;
@@ -33,23 +40,53 @@
 
     .content {
       padding: 20px;
+      flex: 1; /* Hace que el contenido ocupe el espacio disponible */
+      overflow-y: auto; /* Permite desplazarse por el contenido si es necesario */
     }
 
     .footer {
-      background: #f1f1f1;
-      padding: 10px;
-      text-align: center;
-      font-size: 0.9rem;
-    }
+            background: #f1f8e9;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
 
-    .footer a {
-      color: #28a745;
-      text-decoration: none;
-    }
+        .footer a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-    .footer a:hover {
-      text-decoration: underline;
-    }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .btn {
+            margin: 5px;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .footer .btn-primary {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+        }
+
+        .footer .btn-primary:hover {
+            background-color: #1b5e20;
+        }
+
+        .footer .btn-secondary {
+            background-color: #a5d6a7;
+            color: #2e7d32;
+            border: none;
+        }
+
+        .footer .btn-secondary:hover {
+            background-color: #81c784;
+        }
 
     #pdf-viewer {
       text-align: center;
@@ -167,28 +204,47 @@
       });
     </script>
 
-    <p>
-      Bienvenido a los detalles del Proyecto 3. Este proyecto se centra en el análisis de datos climáticos
-      utilizando herramientas avanzadas para modelar el cambio climático y sus efectos en el entorno global.
-    </p>
-    <p>
-      Características principales:
-    <ul>
-      <li>Modelos predictivos de cambios climáticos a gran escala.</li>
-      <li>Análisis de tendencias basadas en datos históricos.</li>
-      <li>Interfaz visual para comprender patrones complejos.</li>
-    </ul>
-    </p>
-    <p>
-      El Proyecto 3 combina innovación tecnológica con objetivos de sostenibilidad, proporcionando
-      herramientas clave para afrontar los desafíos climáticos del futuro.
-    </p>
-  </div>
+<p>
+  Bienvenido a los detalles del Proyecto 3. Este proyecto se centra en el análisis de datos climáticos
+  utilizando herramientas avanzadas para modelar el cambio climático y sus efectos en el entorno global.
+</p>
+<p>
+  Características principales:
+  <ul>
+    <li>Modelos predictivos de cambios climáticos a gran escala.</li>
+    <li>Análisis de tendencias basadas en datos históricos.</li>
+    <li>Interfaz visual para comprender patrones complejos.</li>
+  </ul>
+</p>
+<p>
+  El Proyecto 3 combina innovación tecnológica con objetivos de sostenibilidad, proporcionando
+  herramientas clave para afrontar los desafíos climáticos del futuro.
+</p>
 
-  <div class="footer">
-    <p>&copy; 2024 Sento Marcos Ibarra. <a href="../index.html">Volver al Portafolio</a></p>
+<h2>Práctica 3: Cartografía Temática - Raster e Interpolación</h2>
+<p>
+  En esta práctica se utilizan herramientas de geoprocesamiento raster para crear mapas temáticos mediante interpolación de superficies, utilizando datos de temperatura media y precipitación anual en España.
+</p>
+
+<h3>Objetivos</h3>
+<p>
+  Crear mapas temáticos de coropletas utilizando herramientas raster, con el fin de representar fenómenos climáticos a través de métodos de interpolación.
+</p>
+
+<h3>Desarrollo</h3>
+<p>
+  Se utilizan datos de estaciones meteorológicas para crear mapas de temperatura media en junio y precipitación anual en la Península. Los pasos incluyen la creación de capas de puntos, interpolación IDW, recorte por máscara y la configuración de simbología para visualización de los resultados.
+</p>
+
+
+    <div class="footer">
+      <a href="../assets/Documents/3_TEMATICO_RASTER.pdf" class="btn btn-secondary">Descargar PDF</a>
+      <a href="../assets/Documents/PRECIPITACIONES_TEMPERATURAS_MAPA.pdf" class="btn btn-primary">Descargar mapas</a>
   </div>
 </div>
+  </div>
+
+  
 
 </body>
 </html>
