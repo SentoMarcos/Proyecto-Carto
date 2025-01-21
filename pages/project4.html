@@ -1,26 +1,289 @@
-<div class="content">
-    <img src="https://via.placeholder.com/800x400" alt="Imagen del Proyecto 3">
-    <p>
-        Este es el Proyecto 3. El objetivo de este proyecto es el desarrollo de una plataforma de aprendizaje
-        automatizado
-        para mejorar la educación en línea y fomentar la autosuficiencia de los estudiantes.
-    </p>
-    <p>
-        Características principales:
-    <ul>
-        <li>Algoritmos de aprendizaje personalizado.</li>
-        <li>Pistas adaptativas para mejorar la experiencia de aprendizaje.</li>
-        <li>Optimización de contenido educativo basado en feedback instantáneo.</li>
-    </ul>
-    </p>
-    <p>
-        Con este proyecto, se promueve la accesibilidad y la calidad educativa en diferentes áreas del conocimiento.
-    </p>
-    <p>
-        Documentos relacionados:
-    <ul>
-        <li><a href="../projects/P3_PRECIPITACIONES_MAPA.pdf" target="_blank">Ver Documento 1 (PDF)</a></li>
-        <li><a href="../projects/P3_TEMPERATURAS_MAPA.pdf" target="_blank">Ver Documento 2 (PDF)</a></li>
-    </ul>
-    </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto 3 - Detalles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            max-height: 90vh;
+        }
+        .header {
+            background-color: #FF5733; /* Naranja vibrante */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 70vh; /* Limita la altura del contenido */
+        }
+        .footer {
+            background: #1a1a1a;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .footer a {
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer .btn {
+            margin: 5px;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .footer .btn-secondary {
+            background-color: #FF5733; /* Naranja vibrante */
+            color: #1a1a1a;
+            border: none;
+        }
+        .footer .btn-secondary:hover {
+            background-color: #E64A19; /* Naranja más oscuro al hacer hover */
+        }
+        .footer .btn-primary {
+            background-color: #FFC300; /* Amarillo complementario */
+            color: #1a1a1a;
+            border: none;
+        }
+        .footer .btn-primary:hover {
+            background-color: #FFA500; /* Amarillo dorado al hacer hover */
+        }
+        #map {
+            height: 400px; /* Altura del mapa */
+            border: 1px solid #FF5733; /* Borde naranja */
+            border-radius: 8px;
+        }
+        .leaflet-control-layers-expanded {
+            background-color: rgba(26, 26, 26, 0.9) !important;
+            color: white !important;
+        }
+        .fullscreen-btn {
+            position: absolute;
+            bottom: 50px;
+            right: 10px;
+            z-index: 1000;
+            background: #FF5733;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .fullscreen-btn:hover {
+            background: #E64A19;
+        }
+        #map { height: 100vh; }
+
+        /* Contenedor del recuadro de vista previa */
+        .basemap-preview {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            width: 120px;
+            height: 80px;
+            overflow: hidden;
+        }
+        .basemap-preview img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Menú desplegable de estilos de mapa */
+        .basemap-menu {
+            display: none;
+            position: absolute;
+            top: 100px;
+            right: 10px;
+            z-index: 1000;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            font-size: 12px;
+        }
+        .basemap-menu img {
+            width: 100px;
+            height: 50px;
+            margin: 5px 0;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 4px;
+        }
+        .basemap-menu img:hover {
+            border: 2px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Proyecto 3</h1>
+    </div>
+    <div class="content">
+        <div id="map">
+            <!--icono de desplegar no texto-->
+            <button id="fullscreen-btn" class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+            <!--vista previa de los mapas-->
+            <div class="basemap-preview" onclick="toggleMenu()">
+                <img src="https://cartodb-basemaps-c.global.ssl.fastly.net/light_all/6/31/23.png" alt="Vista previa">
+            </div>
+            <div class="basemap-menu" id="basemapMenu">
+                <strong>Estilos de mapa</strong><br>
+                <img src="https://cartodb-basemaps-c.global.ssl.fastly.net/light_all/6/31/23.png" alt="Claro" onclick="changeBaseMap('light')">
+                <img src="https://cartodb-basemaps-c.global.ssl.fastly.net/dark_all/6/31/23.png" alt="Oscuro" onclick="changeBaseMap('dark')">
+                <img src="https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/6/31/23" alt="Satélite" onclick="changeBaseMap('satellite')">
+            </div>
+        </div>
+
+        <p>
+            Bienvenido a los detalles del Proyecto 3. Este proyecto se centra en el análisis de datos climáticos
+            utilizando herramientas avanzadas para modelar el cambio climático y sus efectos en el entorno global.
+        </p>
+        <p>
+            Características principales:
+        <ul>
+            <li>Modelos predictivos de cambios climáticos a gran escala.</li>
+            <li>Análisis de tendencias basadas en datos históricos.</li>
+            <li>Interfaz visual para comprender patrones complejos.</li>
+        </ul>
+        </p>
+        <p>
+            El Proyecto 3 combina innovación tecnológica con objetivos de sostenibilidad, proporcionando
+            herramientas clave para afrontar los desafíos climáticos del futuro.
+        </p>
+    </div>
+    <div class="footer">
+        <a href="../assets/Documents/3_TEMATICO_RASTER.pdf" class="btn btn-secondary">Descargar PDF</a>
+        <a href="../assets/Documents/PRECIPITACIONES_TEMPERATURAS_MAPA.pdf" class="btn btn-primary">Descargar mapas</a>
+    </div>
 </div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    // Inicializa el mapa
+    const map = L.map('map', {
+        center: [41.5, -4], // Coordenadas iniciales en Castilla y León
+        zoom: 7
+    });
+
+    // Capas base
+    const baseLight = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://carto.com/">CartoDB</a> contributors',
+        subdomains: 'abcd'
+    });
+
+    const baseDark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://carto.com/">CartoDB</a> contributors',
+        subdomains: 'abcd'
+    });
+
+    const baseSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri'
+    });
+
+    // Añadir capa base predeterminada
+    baseLight.addTo(map);
+
+    // Cambiar capa base
+    function changeBaseMap(style) {
+        map.eachLayer(layer => {
+            if (layer !== baseLight && layer !== baseDark && layer !== baseSatellite) return; // Mantener GeoJSON
+            map.removeLayer(layer);
+        });
+
+        if (style === 'light') {
+            baseLight.addTo(map);
+            document.querySelector('.basemap-preview img').src = "https://cartodb-basemaps-c.global.ssl.fastly.net/light_all/6/31/23.png";
+        } else if (style === 'dark') {
+            baseDark.addTo(map);
+            document.querySelector('.basemap-preview img').src = "https://cartodb-basemaps-c.global.ssl.fastly.net/dark_all/6/31/23.png";
+        } else if (style === 'satellite') {
+            baseSatellite.addTo(map);
+            document.querySelector('.basemap-preview img').src = "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/6/31/23";
+        }
+        toggleMenu(); // Cierra el menú al seleccionar
+    }
+
+    // Alternar visibilidad del menú
+    function toggleMenu() {
+        const menu = document.getElementById('basemapMenu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Cargar datos GeoJSON (sustituye con la ruta correcta)
+    fetch('../ZONAS_VALIDAS.geojson')
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data, {
+                style: function(feature) {
+                    const dn = feature.properties.DN;
+                    return {
+                        fillColor: dn === 3 ? '#2ca25f' : dn === 4 ? '#ffdd33' : dn === 5 ? '#de2d26' : '#cccccc',
+                        weight: 1,
+                        color: 'black',
+                        fillOpacity: 0.7
+                    };
+                },
+                onEachFeature: function(feature, layer) {
+                    layer.bindPopup(`<b>Área:</b> ${feature.properties.Area_km || 'Sin datos'} km²<br>
+                           <b>Categoría:</b> ${feature.properties.DN === 3 ? 'ALTO' :
+                        feature.properties.DN === 2 ? 'MEDIO' :
+                            feature.properties.DN === 1 ? 'BAJO' : 'DESCONOCIDO'}`);
+                }
+            }).addTo(map);
+        })
+        .catch(error => console.error('Error al cargar el GeoJSON:', error));
+
+    // Función para pantalla completa
+    document.getElementById('fullscreen-btn').addEventListener('click', () => {
+        const mapContainer = document.getElementById('map');
+        if (!document.fullscreenElement) {
+            if (mapContainer.requestFullscreen) {
+                mapContainer.requestFullscreen();
+            } else if (mapContainer.webkitRequestFullscreen) { /* Safari */
+                mapContainer.webkitRequestFullscreen();
+            } else if (mapContainer.msRequestFullscreen) { /* IE11 */
+                mapContainer.msRequestFullscreen();
+            }
+            document.getElementById('fullscreen-btn').innerHTML = '<i class="fas fa-compress"></i>';
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { /* Safari */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE11 */
+                document.msExitFullscreen();
+            }
+            document.getElementById('fullscreen-btn').innerHTML = '<i class="fas fa-expand"></i>';
+        }
+    });
+</script>
+</body>
+</html>
