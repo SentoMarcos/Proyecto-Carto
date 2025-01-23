@@ -11,42 +11,52 @@
     <style>
         body {
             font-family: 'IBM Plex Mono', monospace;
-            background-color: #f9f9f9;
-            color: #333;
+            background-color: rgba(26, 26, 26, 0.9);
+            color: white;
             margin: 0;
             padding: 20px;
+            overflow: hidden;
         }
 
         .container {
             max-width: 900px;
             margin: auto;
-            background: #fff;
+            background: rgba(26, 26, 26, 0.9);
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            overflow: auto;
+            max-height: 90vh;
         }
 
         .header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
+            background-color: #4CAF50;
+            color: #ffffff;
+            padding: 30px;
             text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin: 0;
         }
 
         .content {
-            padding: 20px;
+            padding: 30px;
+            line-height: 1.6;
         }
 
         .footer {
-            background: #f1f1f1;
-            padding: 10px;
+            background: #1a1a1a;
+            padding: 15px;
             text-align: center;
             font-size: 0.9rem;
+            color: white;
         }
 
         .footer a {
-            color: #007bff;
+            color: #4CAF50;
             text-decoration: none;
+            font-weight: bold;
         }
 
         .footer a:hover {
@@ -56,27 +66,17 @@
         iframe {
             width: 100%;
             height: 500px;
-            border: 1px solid #007bff;
+            border: 1px solid #4CAF50;
             border-radius: 8px;
             margin-bottom: 20px;
             position: relative;
         }
 
-        .fullscreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1000;
-            border-radius: 0;
-        }
-
         .fullscreen-btn {
             position: absolute;
-            bottom: 25px;
+            bottom: 30px;
             right: 10px;
-            background: #007bff;
+            background: #4CAF50;
             color: white;
             border: none;
             padding: 10px;
@@ -91,11 +91,33 @@
         }
 
         .fullscreen-btn:hover {
-            background: #0056b3;
+            background: #388E3C;
         }
 
         .fullscreen-btn i {
             margin: 0;
+        }
+
+        /* Estilo para los tabs */
+        .nav-tabs .nav-link {
+            color: #4CAF50;
+            background-color: #fdfdfd;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            margin-right: 5px;
+            padding: 10px 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #ffffff;
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        .nav-tabs .nav-link:hover {
+            background-color: #388E3C;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -105,16 +127,12 @@
         <h1>Práctica 7 - WebMap</h1>
     </div>
     <div class="content">
-
         <ul class="nav nav-tabs" id="mapTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="containers-tab" data-bs-toggle="tab" data-bs-target="#containers" type="button" role="tab" aria-controls="containers" aria-selected="false">Mapa de Contenedores</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="accidents-tab" data-bs-toggle="tab" data-bs-target="#accidents" type="button" role="tab" aria-controls="accidents" aria-selected="true">Mapa de Accidentes</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="notebook-tab" data-bs-toggle="tab" data-bs-target="#notebook" type="button" role="tab" aria-controls="notebook" aria-selected="false">Editar Cuadernillo</button>
             </li>
         </ul>
         <div class="tab-content" id="mapTabsContent">
@@ -134,9 +152,6 @@
                     </button>
                 </div>
             </div>
-            <div class="tab-pane fade" id="notebook" role="tabpanel" aria-labelledby="notebook-tab">
-                <iframe src="https://jupyterlite.readthedocs.io/en/latest/try/lab/?path=cuadernillos/Folium_alumnos_SentoMarcosIbarra.ipynb" title="Editar Cuadernillo" id="iframe-notebook"></iframe>
-            </div>
         </div>
     </div>
     <p>Esta práctica forma parte del curso básico de Python, dentro del contexto del "Grado en Tecnologías Interactivas" de la Universidad Politécnica de Valencia. En ella, se utiliza la biblioteca <strong>Folium</strong> para crear mapas interactivos que incluyen elementos como:</p>
@@ -146,9 +161,15 @@
         <li>Exportación de mapas como archivos HTML para su integración en páginas web.</li>
     </ul>
     <p>El objetivo principal es proporcionar herramientas visuales para el análisis geográfico y facilitar la creación de mapas personalizados.</p>
-
+    <div class="tab-pane" id="notebook"  aria-labelledby="notebook-tab">
+        <iframe src="./cuadernillos/Folium_alumnos_SentoMarcosIbarra.html" title="Editar Cuadernillo" id="iframe-notebook"></iframe>
+    </div>
     <div class="footer">
-        <p>&copy; 2024 Sento Marcos Ibarra. <a href="../index.html">Volver al Portafolio</a></p>
+        <!-- btn descargar cuadernillo, descargar guion, descargar resultados-->
+        <p>Descargas disponibles:</p>
+        <a href="../assets/Folium_alumnos_SentoMarcosIbarra.ipynb" download="Practica_Alumnos_WebMap.ipynb" class="btn btn-success btn-lg mb-2">Descargar Notebook</a>
+        <a href="../assets/webmaps/madrid_acci_Marcos_Ibarra_Sento.html" download="madrid_acci_Marcos_Ibarra_Sento.html" class="btn btn-success btn-lg mb-2">Descargar Mapa de Accidentes</a>
+        <a href="../assets/webmaps/madrid_contenedores_Marcos_Ibarra_Sento.html" download="madrid_contenedores_Marcos_Ibarra_Sento.html" class="btn btn-success btn-lg mb-2">Descargar Mapa de Contenedores</a>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
