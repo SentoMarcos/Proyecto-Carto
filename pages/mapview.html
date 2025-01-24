@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interactivo Mejorado</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* Menú lateral */
+        .menu-lateral {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            background-color: #252525;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            padding: 10px;
+            z-index: 999;
+        }
+
+        .menu-section {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .menu-title {
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .menu-item {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #444;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background-color: #666;
+        }
+
+        .menu-item img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .menu-dropdown {
+            width: 100%;
+            background-color: #444;
+            border-radius: 4px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        .menu-dropdown-item {
+            padding: 10px;
+            background-color: #555;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-dropdown-item:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+<!-- Menú lateral -->
+<div class="menu-lateral">
+    <div class="menu-section">
+        <div class="menu-title">Prácticas</div>
+        <div class="menu-item" onclick="flyToLocation(37.2077, 9.8634)">
+            <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="NDWI" />
+            <span>NDWI</span>
+        </div>
+        <div class="menu-item" onclick="flyToLocation(38.5371, -0.7117)">
+            <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="GEE" />
+            <span>Google Earth Engine</span>
+        </div>
+        <div class="menu-item" onclick="flyToLocation(38.5399, -0.7066)">
+            <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Folium" />
+            <span>Folium</span>
+        </div>
+    </div>
+
+    <div class="menu-section">
+        <div class="menu-title">Vistas</div>
+        <div class="menu-dropdown">
+            <div class="menu-dropdown-item" onclick="changeBaseLayer('dark')">🌙 Vista Oscura</div>
+            <div class="menu-dropdown-item" onclick="changeBaseLayer('streets')">🗺️ Vista Calles</div>
+            <div class="menu-dropdown-item" onclick="changeBaseLayer('topo')">🗻 Vista Topográfica</div>
+            <div class="menu-dropdown-item" onclick="changeBaseLayer('satellite')">🛰️ Vista Satélite</div>
+        </div>
+    </div>
+</div>
+
+<!-- Mapa -->
+<div id="map"></div>
+
+<script>
+    // Coordenadas y datos de las prácticas
+    const practices = [
+        {
+            name: "NDWI (Resuelta por Sento)",
+            lat: 37.2077,
+            lng: 9.8634,
+            url: "https://colab.research.google.com/github/SentoMarcos/Proyecto-Carto/blob/sento/contents/NDWI_Sentoprac10resuelta.ipynb"
+        },
+        {
+            name: "Google Earth Engine para Python (Resuelta por Sento)",
+            lat: 38.5371,
+            lng: -0.7117,
+            url: "https://colab.research.google.com/github/SentoMarcos/Proyecto-Carto/blob/sento/contents/GEE_SentoMarcosIbarraprac9resuelta.ipynb"
+        },
+        {
+            name: "Folium (Práctica 8 Resuelta por Sento)",
+            lat: 38.5399,
+            lng: -0.7066,
+            url: "https://colab.research.google.com/github/SentoMarcos/Proyecto-Carto/blob/sento/contents/Folium_alumnos_SentoMarcosIbarraprac8resuelta.ipynb"
+        }
+    ];
+
+    // Inicializar el mapa
+    const map = L.map('map', { zoomControl: false }).setView([38.0, -3.0], 6);
+
+    // Capas base
+    const darkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap contributors',
+        subdomains: 'abcd',
+        maxZoom: 19
+    }).addTo(map);
+
+    const streetsLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 19
+    });
+
+    const topoLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenTopoMap contributors',
+        maxZoom: 17
+    });
+
+    const satelliteLayer = L.tileLayer('https://{s}.tile.jawg.io/jawg-satellite/{z}/{x}/{y}{r}.png?access-token=YOUR_ACCESS_TOKEN', {
+        attribution: '© Jawg Maps contributors',
+        maxZoom: 19
+    });
+
+    // Función para cambiar capas base
+    function changeBaseLayer(layer) {
+        map.eachLayer(function (lay) {
+            map.removeLayer(lay);
+        });
+        if (layer === 'dark') map.addLayer(darkLayer);
+        else if (layer === 'streets') map.addLayer(streetsLayer);
+        else if (layer === 'topo') map.addLayer(topoLayer);
+        else if (layer === 'satellite') map.addLayer(satelliteLayer);
+    }
+
+    // Cluster de marcadores
+    const markers = L.markerClusterGroup();
+
+    // Añadir marcadores al cluster
+    practices.forEach(practice => {
+        const marker = L.marker([practice.lat, practice.lng])
+            .bindPopup(`<b>${practice.name}</b><br><a href="${practice.url}" target="_blank">Abrir Cuaderno</a>`);
+        markers.addLayer(marker);
+    });
+
+    map.addLayer(markers);
+
+    // Función para volar a una ubicación
+    function flyToLocation(lat, lng) {
+        map.flyTo([lat, lng], 13, { duration: 2 });
+    }
+</script>
+</body>
+</html>
