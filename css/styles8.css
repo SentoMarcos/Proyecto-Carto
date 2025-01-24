@@ -1,0 +1,110 @@
+body {
+    font-family: 'IBM Plex Mono', monospace;
+    background-color: rgba(26, 26, 26, 0.9);
+    color: white;
+    margin: 0;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: rgba(26, 26, 26, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    max-height: 90vh;
+}
+
+.header {
+    background-color: #4CAF50;
+    color: #ffffff;
+    padding: 30px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.content {
+    padding: 30px;
+    line-height: 1.6;
+}
+
+.footer {
+    background: #1a1a1a;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.footer a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+iframe {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #4CAF50;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.fullscreen-btn {
+    position: absolute;
+    bottom: 30px;
+    right: 10px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fullscreen-btn:hover {
+    background: #388E3C;
+}
+
+.fullscreen-btn i {
+    margin: 0;
+}
+
+/* Estilo para los tabs */
+.nav-tabs .nav-link {
+    color: #4CAF50;
+    background-color: #fdfdfd;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    margin-right: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-tabs .nav-link.active {
+    color: #ffffff;
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: #388E3C;
+    color: #ffffff;
+}
