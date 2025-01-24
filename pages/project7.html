@@ -3,37 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto 7 - Detalles</title>
+    <title>Proyecto 7 - GNSS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link href="../css/styles7.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #252525;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #333;
+            color: #00d4ff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .content {
+            padding: 30px;
+            line-height: 1.6;
+        }
+
+        .content img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .content h2 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .content ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background: #333;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .btn {
+            margin: 5px;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .footer .btn-primary {
+            background-color: #00d4ff;
+            color: #1a1a1a;
+            border: none;
+        }
+
+        .footer .btn-primary:hover {
+            background-color: #009ecc;
+        }
+
+        /* Estilos para la tabla */
+        .table-container {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #333;
+            color: white;
+            border: 1px solid #555;
+        }
+
+        table th, table td {
+            border: 1px solid #555;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #444;
+            color: #00d4ff;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
+        table tr:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h1>Proyecto 7</h1>
+        <h1>Proyecto 7 - GNSS</h1>
     </div>
     <div class="content">
-        
-        <h2>Descripción</h2>
+
+            <h2>Descripción</h2>
+            <p>
+                Esta práctica se enfoca en el análisis de rendimiento utilizando datos GNSS con waypoints en formato GPX.
+                Se desarrollaron herramientas para procesar los datos y generar un DataFrame con información clave como:
+            </p>
+            <ul>
+                <li>Latitud, Longitud y Cota (m).</li>
+                <li>Distancia entre puntos y distancia acumulada.</li>
+                <li>Pendiente (%), Velocidad (km/h), y Orientación (º).</li>
+                <li>Tiempos registrados entre cada punto.</li>
+            </ul>
+            <p>
+                Además, se genera un gráfico que relaciona la distancia acumulada con la pendiente. El objetivo es proporcionar una
+                vista integral del rendimiento de las rutas GNSS, ideal para aplicaciones en tecnologías de información geográfica.
+            </p>
+            <img src="../assets/Images/grafico_rendimiento.jpg" alt="Imagen del Proyecto 7">
+        <h2>Datos GNSS</h2>
         <p>
-            Esta práctica se enfoca en el análisis de rendimiento utilizando datos GNSS con waypoints en formato GPX.
-            Se desarrollaron herramientas para procesar los datos y generar un DataFrame con información clave como:
-        </p>
-        <ul>
-            <li>Latitud, Longitud y Cota (m).</li>
-            <li>Distancia entre puntos y distancia acumulada.</li>
-            <li>Pendiente (%), Velocidad (km/h), y Orientación (º).</li>
-            <li>Tiempos registrados entre cada punto.</li>
-        </ul>
-        <p>
-            Además, se genera un gráfico que relaciona la distancia acumulada con la pendiente. El objetivo es proporcionar una
-            vista integral del rendimiento de las rutas GNSS, ideal para aplicaciones en tecnologías de información geográfica.
+            A continuación, se muestra la tabla con los datos procesados del rendimiento GNSS, incluyendo información
+            detallada como latitud, longitud, elevación, y otros indicadores clave:
         </p>
 
-        <img src="../assets/Images/grafico_rendimiento.jpg" alt="Imagen del Proyecto 7">
-        <iframe src="../assets/Waypoints.html" style="width: 100%; height: 500px; border: none; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); margin-top: 20px;">
-        </iframe>
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr style="text-align: right;">
+                    <th>ID</th>
+                    <th>Latitud</th>
+                    <th>Longitud</th>
+                    <th>Elevaci�n (m)</th>
+                    <th>Tiempo</th>
+                    <th>Dist Parcial (m)</th>
+                    <th>Dist Acumulada (m)</th>
+                    <th>Pendiente (%)</th>
+                    <th>Velocidad (km/h)</th>
+                    <th>Acimut</th>
+                    <th>Tiempo (s)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>38.968484</td>
+                    <td>-0.148688</td>
+                    <td>-6.848</td>
+                    <td>2020-10-06T15:42:19Z</td>
+                    <td>0.000000</td>
+                    <td>0.000000</td>
+                    <td>0.000000</td>
+                    <td>0.000000</td>
+                    <td>0.000000</td>
+                    <td>0.0</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>38.967718</td>
+                    <td>-0.150631</td>
+                    <td>5.751</td>
+                    <td>2020-10-06T15:44:55Z</td>
+                    <td>3.284641</td>
+                    <td>3.284641</td>
+                    <td>383.573134</td>
+                    <td>0.075799</td>
+                    <td>63.111422</td>
+                    <td>156.0</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>38.967415</td>
+                    <td>-0.151293</td>
+                    <td>3.847</td>
+                    <td>2020-10-06T15:45:44Z</td>
+                    <td>1.158248</td>
+                    <td>4.442889</td>
+                    <td>-164.386160</td>
+                    <td>0.085096</td>
+                    <td>59.514985</td>
+                    <td>49.0</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>38.965885</td>
+                    <td>-0.151144</td>
+                    <td>4.562</td>
+                    <td>2020-10-06T15:47:40Z</td>
+                    <td>2.975523</td>
+                    <td>7.418413</td>
+                    <td>24.029386</td>
+                    <td>0.092344</td>
+                    <td>4.313670</td>
+                    <td>116.0</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>38.965216</td>
+                    <td>-0.150998</td>
+                    <td>5.601</td>
+                    <td>2020-10-06T15:48:45Z</td>
+                    <td>1.315894</td>
+                    <td>8.734306</td>
+                    <td>78.957748</td>
+                    <td>0.072880</td>
+                    <td>9.627392</td>
+                    <td>65.0</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>38.965000</td>
+                    <td>-0.150899</td>
+                    <td>4.004</td>
+                    <td>2020-10-06T15:49:00Z</td>
+                    <td>0.444682</td>
+                    <td>9.178988</td>
+                    <td>-359.133260</td>
+                    <td>0.106724</td>
+                    <td>19.615185</td>
+                    <td>15.0</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>38.964634</td>
+                    <td>-0.150661</td>
+                    <td>4.727</td>
+                    <td>2020-10-06T15:49:42Z</td>
+                    <td>0.795324</td>
+                    <td>9.974312</td>
+                    <td>90.906342</td>
+                    <td>0.068171</td>
+                    <td>26.820876</td>
+                    <td>42.0</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>38.963839</td>
+                    <td>-0.150091</td>
+                    <td>7.208</td>
+                    <td>2020-10-06T15:51:12Z</td>
+                    <td>1.765076</td>
+                    <td>11.739388</td>
+                    <td>140.560546</td>
+                    <td>0.070603</td>
+                    <td>29.137490</td>
+                    <td>90.0</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>38.962955</td>
+                    <td>-0.150394</td>
+                    <td>9.550</td>
+                    <td>2020-10-06T15:52:27Z</td>
+                    <td>1.774122</td>
+                    <td>13.513510</td>
+                    <td>132.008941</td>
+                    <td>0.085158</td>
+                    <td>14.920475</td>
+                    <td>75.0</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>38.962942</td>
+                    <td>-0.147204</td>
+                    <td>1.780</td>
+                    <td>2020-10-06T15:56:15Z</td>
+                    <td>4.810132</td>
+                    <td>18.323642</td>
+                    <td>-161.534012</td>
+                    <td>0.075949</td>
+                    <td>89.698707</td>
+                    <td>228.0</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>38.963695</td>
+                    <td>-0.145611</td>
+                    <td>2.238</td>
+                    <td>2020-10-06T15:58:20Z</td>
+                    <td>2.811040</td>
+                    <td>21.134682</td>
+                    <td>16.292905</td>
+                    <td>0.080958</td>
+                    <td>121.295680</td>
+                    <td>125.0</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="footer">
         <p>Descargas disponibles:</p>
