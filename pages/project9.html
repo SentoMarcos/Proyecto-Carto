@@ -54,13 +54,12 @@
                 <iframe src="./EviPostprac9.html" width="100%" height="600" frameborder="0"></iframe>
             </div>
             <div class="tab-pane fade" id="savi" role="tabpanel" aria-labelledby="savi-tab">
-                <iframe src="./SaviPostprac9.html" width="100%" height="600" frameborder="0"></iframe>
+                <iframe id="savi-iframe" src="about:blank" width="100%" height="600" frameborder="0"></iframe>
             </div>
             <div class="tab-pane fade" id="gee" role="tabpanel" aria-labelledby="gee-tab">
                 <iframe src="../pages/cuadernillos/GEE_SentoMarcosIbarra.html" width="100%" height="600" frameborder="0"></iframe>
             </div>
         </div>
-
     </div>
 
     <div class="footer">
@@ -72,5 +71,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('savi-tab').addEventListener('shown.bs.tab', function () {
+        document.getElementById('savi-iframe').src = './SaviPostprac9.html';
+    });
+</script>
 </body>
 </html>
