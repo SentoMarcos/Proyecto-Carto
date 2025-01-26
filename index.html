@@ -3,248 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartografía - Sento Marcos Ibarra</title>
+    <title>Cartografía - Sento Marcos Ibarra y Javier Rupérez Miranda</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'IBM Plex Mono', monospace;
-            background-color: #1a1a1a;
-            color: white;
-            overflow-x: hidden;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
+    <link href="./css/styles.css" rel="stylesheet">
 
-        .light-theme {
-            background-color: #f0f0f0;
-            color: #1a1a1a;
-        }
-        body.fade-out {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg') no-repeat center center/cover;
-            text-align: center;
-        }
-
-        .hero .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            color: white;
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-        }
-
-        .hero-content a {
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            text-decoration: none;
-            background-color: #00d4ff;
-            color: #1a1a1a;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .hero-content a:hover {
-            background-color: #009ecc;
-        }
-        .theme-toggle {
-            color: white !important;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.9);
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        header .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-        }
-
-        header nav {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        header nav a {
-            text-decoration: none;
-            color: white;
-            transition: color 0.3s ease-in-out;
-        }
-
-        header nav a:hover {
-            color: #00d4ff;
-        }
-
-        header .theme-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-        }
-        /* Ajuste del logo y navegación en dispositivos pequeños */
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        /* El botón de cambio de tema queda alineado en el menú */
-        .theme-toggle {
-            color: white !important;
-            transition: color 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            color: #00d4ff !important;
-        }
-
-        /* Espaciado interno en el menú colapsable */
-        .navbar-nav .nav-link {
-            margin: 0 10px;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #00d4ff;
-        }
-        .sidebar {
-            position: fixed;
-            top: 60px;
-            left: 0;
-            width: 80px;
-            height: calc(100% - 60px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 0;
-            gap: 20px;
-            background: rgba(26, 26, 26, 0.9);
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .sidebar a {
-            text-decoration: none;
-            color: white;
-            font-size: 14px;
-            text-align: center;
-            padding: 10px;
-            width: 100%;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .sidebar a:hover {
-            background: #00d4ff;
-            color: #1a1a1a;
-            transform: scale(1.1);
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #1a1a1a;
-            color: #d0d0d0;
-        }
-
-        .light-theme footer {
-            background: #f0f0f0;
-            color: #1a1a1a;
-        }
-
-        .projects .project img {
-            transition: transform 0.3s ease;
-        }
-
-        .projects .project img:hover {
-            transform: scale(1.05);
-        }
-
-        .iframe-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .iframe-modal.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .iframe-modal iframe {
-            width: 80%;
-            height: 80%;
-            border: none;
-            border-radius: 10px;
-        }
-
-        .iframe-modal .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-            color: white;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
 <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand" href="#"><i class="fas fa-globe"></i> Sento</a>
+        <a class="navbar-brand" href="#"><i class="fas fa-globe"></i> Sento y Javier</a>
 
         <!-- Botón para menú desplegable en pantallas pequeñas -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -255,35 +26,47 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
+                    <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Inicio</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#projects"><i class="fas fa-folder-open"></i> Proyectos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about"><i class="fas fa-user"></i> Sobre Mí</a>
+                    <a class="nav-link" href="pages/about_us.html"><i class="fas fa-user"></i> Sobre Nosotros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact"><i class="fas fa-envelope"></i> Contacto</a>
+                    <a class="nav-link" href="pages/explicacion.html"><i class="fas fa-info"></i> Tecnologías</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/SentoMarcos" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link theme-toggle d-flex align-items-center" id="theme-toggle" href="#" style="cursor: pointer;">
-                        <i id="theme-icon" class="fas fa-sun me-1"></i><span>Cambiar Tema</span>
-                    </a>
-                </li>
+
             </ul>
         </div>
     </div>
 </header>
+<div class="sidebar-container">
+    <!-- Botón para abrir/cerrar -->
+    <div class="menu-toggle">
+        <i class="fas fa-chevron-right"></i>
+    </div>
 
-<div class="sidebar">
-    <a href="#project1"><i class="fas fa-map"></i></a>
-    <a href="#project2"><i class="fas fa-map-marker-alt"></i></a>
-    <a href="#project3"><i class="fas fa-globe"></i></a>
-    <a href="#project4"><i class="fas fa-compass"></i></a>
-    <a href="#project5"><i class="fas fa-drafting-compass"></i></a>
-    <a href="#project6"><i class="fas fa-ruler-combined"></i></a>
+    <!-- Menú lateral -->
+    <div class="sidebar">
+        <a href="./pages/liveEditorAnaconda.html" class="sidebar-item">
+            <img src="./assets/Images/anaconda.svg" alt="Anaconda" class="sidebar-logo">
+            <p class="sidebar-text">Live Editor de Anaconda</p>
+        </a>
+        <a href="pages/mapview.html" class="sidebar-item">
+            <img src="./assets/Images/map.svg" alt="Mapa" class="sidebar-logo">
+            <p class="sidebar-text">Ver Proyectos en un Mapa</p>
+        </a>
+        <a href="./pages/practicas.html" class="sidebar-item">
+            <img src="./assets/Images/practices.svg" alt="Prácticas" class="sidebar-logo">
+            <p class="sidebar-text">Acceso a Prácticas</p>
+        </a>
+    </div>
 </div>
+
+
+
 
 <section class="hero">
     <div class="overlay"></div>
@@ -292,80 +75,117 @@
         <p>Explora mis proyectos destacados de cartografía, combinando innovación y precisión.</p>
         <a href="#projects">Ver Proyectos</a>
     </div>
+    <!--Btn animado que indica bajar hacia abajo-->
+    <div class="scroll-down">
+        <a href="#projects">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+    </div>
+
 </section>
 
 <section class="projects container" id="projects">
     <h2 class="text-center mb-5">Proyectos Destacados</h2>
 
+    <!-- Barra de búsqueda -->
+    <div class="search-bar mb-4">
+        <input
+                type="text"
+                id="searchInput"
+                class="form-control"
+                placeholder="Buscar proyectos por nombre o descripción..."
+        />
+    </div>
     <!-- Proyecto 1 -->
-    <div class="project row align-items-center mb-5" id="project1" data-aos="fade-right">
+    <div class="project row align-items-center mb-5" id="project1" data-name="QGIS" data-description="Introducción al uso del software QGIS en el ámbito de SIG" data-aos="fade-right">
         <div class="col-md-6">
-            <img src="https://via.placeholder.com/600x400" alt="Proyecto 1" class="img-fluid rounded">
+            <img src="./assets/Images/QGIS_logo.png" alt="Proyecto 1" class="img-fluid rounded proyect-preview-img">
         </div>
         <div class="col-md-6">
             <h3>Proyecto 1</h3>
-            <p>Descripción del Proyecto 1.</p>
+            <p>Introducción a QGIS</p>
+            <p>Este proyecto constituye una introducción al uso del software QGIS en el ámbito de los Sistemas de Información Geográfica (SIG).</p>
             <button class="btn btn-primary open-modal" data-url="pages/project1.html">Ver Detalles</button>
         </div>
     </div>
 
-    <!-- Proyecto 2 -->
-    <div class="project row align-items-center mb-5" id="project2" data-aos="fade-left">
+    <!-- Proyecto 3 -->
+    <div class="project row align-items-center mb-5" id="project3" data-name="Análisis de datos climáticos" data-description="Modelos predictivos de cambios climáticos y análisis de tendencias históricas" data-aos="fade-left">
         <div class="col-md-6 order-md-2">
-            <img src="https://via.placeholder.com/600x400" alt="Proyecto 2" class="img-fluid rounded">
+            <img src="assets/Images/PRACTICA3.png" alt="Proyecto 3" class="img-fluid rounded proyect-preview-img">
         </div>
         <div class="col-md-6 order-md-1">
-            <h3>Proyecto 2</h3>
-            <p>Descripción del Proyecto 2.</p>
-            <button class="btn btn-primary open-modal" data-url="pages/project2.html">Ver Detalles</button>
-        </div>
-    </div>
-
-    <!-- Proyecto 3 -->
-    <div class="project row align-items-center mb-5" id="project3" data-aos="fade-right">
-        <div class="col-md-6">
-            <img src="https://via.placeholder.com/600x400" alt="Proyecto 3" class="img-fluid rounded">
-        </div>
-        <div class="col-md-6">
             <h3>Proyecto 3</h3>
-            <p>Descripción del Proyecto 3.</p>
+            <p>Análisis de datos climáticos</p>
+            <p>Este proyecto se centra en el análisis de datos climáticos utilizando herramientas avanzadas para modelar el cambio climático y sus efectos en el entorno global.</p>
             <button class="btn btn-primary open-modal" data-url="pages/project3.html">Ver Detalles</button>
         </div>
     </div>
 
     <!-- Proyecto 4 -->
-    <div class="project row align-items-center mb-5" id="project4" data-aos="fade-left">
-        <div class="col-md-6 order-md-2">
-            <img src="https://via.placeholder.com/600x400" alt="Proyecto 4" class="img-fluid rounded">
+    <div class="project row align-items-center mb-5" id="project4" data-name="Hábitat del Lobo Ibérico" data-description="Análisis territorial para áreas protegidas del Lobo Ibérico en Castilla y León" data-aos="fade-right">
+        <div class="col-md-6">
+            <img src="./assets/Images/prac4preview.png" alt="Proyecto 4" class="img-fluid rounded proyect-preview-img">
         </div>
-        <div class="col-md-6 order-md-1">
+        <div class="col-md-6">
             <h3>Proyecto 4</h3>
-            <p>Descripción del Proyecto 4.</p>
+            <p>Hábitat del Lobo Ibérico</p>
+            <p>Identificación de zonas idóneas para la creación de un área protegida para el Lobo Ibérico en Castilla y León.</p>
             <button class="btn btn-primary open-modal" data-url="pages/project4.html">Ver Detalles</button>
         </div>
     </div>
 
-    <!-- Proyecto 5 -->
-    <div class="project row align-items-center mb-5" id="project5" data-aos="fade-right">
-        <div class="col-md-6">
-            <img src="https://via.placeholder.com/600x400" alt="Proyecto 5" class="img-fluid rounded">
+    <!-- Proyecto 7 -->
+    <div class="project row align-items-center mb-5" id="project7" data-name="Análisis de Rendimiento GNSS" data-description="Procesamiento de datos GNSS con análisis de rutas y pendientes" data-aos="fade-left">
+        <div class="col-md-6 order-md-2">
+            <img src="./assets/Images/grafico_rendimiento.jpg" alt="Proyecto 7" class="img-fluid rounded">
         </div>
-        <div class="col-md-6">
-            <h3>Proyecto 5</h3>
-            <p>Descripción del Proyecto 5.</p>
-            <button class="btn btn-primary open-modal" data-url="pages/project5.html">Ver Detalles</button>
+        <div class="col-md-6 order-md-1">
+            <h3>Proyecto 7</h3>
+            <p>Análisis de Rendimiento GNSS</p>
+            <p>Esta práctica se enfoca en el análisis de rendimiento utilizando datos GNSS con waypoints en formato GPX.</p>
+            <button class="btn btn-primary open-modal" data-url="pages/project7.html">Ver Detalles</button>
         </div>
     </div>
 
-    <!-- Proyecto 6 -->
-    <div class="project row align-items-center mb-5" id="project6" data-aos="fade-left">
+    <!-- Proyecto 8 -->
+    <div class="project row align-items-center mb-5" id="project8" data-name="Mapas Interactivos con Folium" data-description="Mapas interactivos utilizando Folium para datos de contenedores y accidentes" data-aos="fade-right">
+        <div class="col-md-6 order">
+            <img src="./assets/Images/prject8.png" alt="Proyecto 8" class="img-fluid rounded">
+        </div>
+        <div class="col-md-6 order">
+            <h3>Proyecto 8</h3>
+            <p>Mapas Interactivos con Folium</p>
+            <p>Creación de mapas interactivos utilizando Folium para datos de contenedores y accidentes.</p>
+            <button class="btn btn-primary open-modal" data-url="pages/project8.html">Ver Detalles</button>
+        </div>
+    </div>
+
+    <!-- Proyecto 9 -->
+    <div class="project row align-items-center mb-5" id="project9" data-name="Plataforma Big Data" data-description="Plataforma de análisis para procesamiento distribuido de grandes volúmenes de datos" data-aos="fade-left">
         <div class="col-md-6 order-md-2">
-            <img src="https://via.placeholder.com/600x400" alt="Proyecto 6" class="img-fluid rounded">
+            <img src="assets/Images/prac9.png" alt="Proyecto 9" class="img-fluid rounded">
         </div>
         <div class="col-md-6 order-md-1">
-            <h3>Proyecto 6</h3>
-            <p>Descripción del Proyecto 6.</p>
-            <button class="btn btn-primary open-modal" data-url="pages/project6.html">Ver Detalles</button>
+            <h3>Proyecto 9</h3>
+            <p>Plataforma Big Data</p>
+            <p>Creación de una plataforma de análisis de Big Data diseñada para procesar grandes volúmenes de información en tiempo récord.</p>
+            <button class="btn btn-primary open-modal" data-url="pages/project9.html">Ver Detalles</button>
+        </div>
+    </div>
+
+    <!-- Proyecto 10 -->
+    <div class="project row align-items-center mb-5" id="project10" data-name="Google Earth Engine" data-description="Visualización y análisis de índices medioambientales con Google Earth Engine" data-aos="fade-right">
+        <div class="col-md-6 order">
+            <img src="./assets/Images/Lago_Uvs_Mongolia.jpg" alt="Proyecto 10" class="img-fluid rounded">
+        </div>
+        <div class="col-md-6 order">
+            <h3>Proyecto 10</h3>
+            <p>Google Earth Engine</p>
+            <p>Visualización y análisis de índices medioambientales con Google Earth Engine.</p>
+            <button class="btn btn-primary open-modal" data-url="pages/project10.html">Ver Detalles</button>
         </div>
     </div>
 </section>
@@ -376,11 +196,14 @@
 </div>
 
 <footer>
-    <p>© 2024 Sento Marcos Ibarra. Todos los derechos reservados.</p>
+    <p>© 2024 Sento Marcos Ibarra y Javier Rupérez Miranda. Todos los derechos reservados.</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="JS/iframes.js"></script>
+<script src="JS/sidebar.js"></script>
+
+<script src="JS/search.js"></script>
 </body>
 </html>

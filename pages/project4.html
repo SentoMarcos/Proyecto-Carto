@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,85 +6,94 @@
     <title>Proyecto 4 - Detalles</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'IBM Plex Mono', monospace;
-            background-color: #f9f9f9;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .header {
-            background-color: #e83e8c;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .content {
-            padding: 20px;
-        }
-
-        .content img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .footer {
-            background: #f1f1f1;
-            padding: 10px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .footer a {
-            color: #e83e8c;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="../css/styles4.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <h1>Proyecto 4</h1>
-    </div>
+
     <div class="content">
-        <img src="https://via.placeholder.com/800x400" alt="Imagen del Proyecto 4">
+        <div class="header">
+            <h1>Proyecto 4</h1>
+        </div>
+        <div id="map">
+            <!--icono de desplegar no texto-->
+            <button id="fullscreen-btn" class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+            <!--vista previa de los mapas-->
+            <div class="basemap-preview" onclick="toggleMenu()">
+                <img src="https://cartodb-basemaps-c.global.ssl.fastly.net/light_all/6/31/23.png" alt="Vista previa">
+            </div>
+            <div class="basemap-menu" id="basemapMenu">
+                <strong>Estilos de mapa</strong><br>
+                <img src="https://cartodb-basemaps-c.global.ssl.fastly.net/light_all/6/31/23.png" alt="Claro" onclick="changeBaseMap('light')">
+                <img src="https://cartodb-basemaps-c.global.ssl.fastly.net/dark_all/6/31/23.png" alt="Oscuro" onclick="changeBaseMap('dark')">
+                <img src="https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/6/31/23" alt="Satélite" onclick="changeBaseMap('satellite')">
+            </div>
+        </div>
+        <h2>Análisis Territorial del Hábitat del Lobo</h2>
+
+        <h3>Objetivos</h3>
         <p>
-            En el Proyecto 4, se desarrolló una aplicación innovadora para mejorar la logística en
-            centros urbanos utilizando algoritmos de optimización de rutas.
+            Identificar zonas idóneas para la creación de un área protegida para el
+            <strong>Lobo Ibérico</strong> en la <strong>Comunidad de Castilla y León</strong>,
+            utilizando herramientas SIG avanzadas. Se busca integrar datos raster y vectoriales para realizar un análisis territorial basado en:
         </p>
-        <p>
-            Características principales:
         <ul>
-            <li>Rutas optimizadas para flotas de transporte.</li>
-            <li>Ahorro de tiempo en operaciones logísticas.</li>
-            <li>Reducción de costes mediante simulaciones inteligentes.</li>
+            <li>Criterios de aptitud ecológica.</li>
+            <li>Densidad poblacional.</li>
+            <li>Superficie mínima.</li>
         </ul>
-        </p>
+
+        <h3>Introducción</h3>
         <p>
-            Este proyecto proporciona soluciones prácticas para hacer más eficientes las operaciones
-            de transporte en las ciudades.
+            En esta práctica, se utiliza <strong>QGIS</strong> para combinar diversas variables geográficas y datos estadísticos con el propósito de determinar las áreas más aptas para proteger al Lobo Ibérico.
+            Las variables incluyen:
         </p>
+        <ul>
+            <li>Datos de lluvia media anual.</li>
+            <li>Temperaturas medias anuales.</li>
+            <li>Altitudes específicas.</li>
+        </ul>
+        <p>
+            Además, se establecen condiciones adicionales:
+        </p>
+        <ul>
+            <li>Zonas con valores de aptitud de 3, 4 o 5 (donde 3 es más apto).</li>
+            <li>Municipios con densidad de población menor o igual a 10 hab/km².</li>
+            <li>Superficie mínima de las zonas: 10 km².</li>
+        </ul>
+
+        <h3>Metodología</h3>
+        <p>El desarrollo de esta práctica se divide en los siguientes pasos:</p>
+        <ol>
+            <li><strong>Inicio:</strong> Crear un proyecto QGIS llamado <code>LOBOS</code> y definir el sistema de referencia EPSG:4326.</li>
+            <li><strong>Reclasificación:</strong> Reclasificar capas raster de lluvias, temperaturas y altitudes según criterios de aptitud.</li>
+            <li><strong>Cálculo de aptitud:</strong> Combinar las capas raster usando una suma aritmética para generar un mapa de aptitud.</li>
+            <li><strong>Densidad poblacional:</strong> Filtrar municipios con densidad menor o igual a 10 hab/km².</li>
+            <li><strong>Vectorización:</strong> Transformar capas raster en polígonos y filtrar zonas con valores de aptitud entre 3 y 5.</li>
+            <li><strong>Disolver y calcular áreas:</strong> Generar polígonos finales, calcular su superficie en km² y seleccionar áreas mayores o iguales a 10 km².</li>
+        </ol>
+
+        <h3>Resultado Final</h3>
+        <p>
+            El resultado es un mapa en formato A4 que incluye las zonas válidas para la protección del Lobo Ibérico. El mapa debe contener:
+        </p>
+        <ul>
+            <li>Leyenda indicando los valores de aptitud.</li>
+            <li>Un título descriptivo y el nombre del autor.</li>
+            <li>Una cuadrícula UTM.</li>
+        </ul>
+        <div class="footer">
+            <a href="../assets/Documents/4_ANALISIS_TERRITORIO.pdf" class="btn btn-secondary"><i class="fas fa-download"></i>Descargar Práctica</a>
+            <a href="../assets/Documents/RESULTADOS_LOBO.pdf" class="btn btn-primary"><i class="fas fa-download"></i>Descargar Resultados</a>
+        </div>
     </div>
-    <div class="footer">
-        <p>&copy; 2024 Sento Marcos Ibarra. <a href="../index.html">Volver al Portafolio</a></p>
-    </div>
+
 </div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../JS/project4.js"></script>
 </body>
 </html>

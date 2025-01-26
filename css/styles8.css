@@ -1,0 +1,151 @@
+body {
+    font-family: 'IBM Plex Mono', monospace;
+    background-color: rgba(26, 26, 26, 0);
+    color: white;
+    margin: 0;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Scrollbar personalizada */
+.container::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: #00d4ff; /* Color del "pulgar" (thumb) */
+    border-radius: 20px; /* Bordes completamente redondeados */
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.6); /* Efecto de flotante con sombra */
+    border: 3px solid rgba(26, 26, 26, 0.9); /* Espacio entre el thumb y el track */
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background: #00d4ff; /* Color al pasar el mouse */
+    box-shadow: 0 0 15px rgba(0, 156, 204, 0.8); /* Sombra más intensa al hacer hover */
+}
+
+.container::-webkit-scrollbar-track {
+    background: rgba(26, 26, 26, 0.9); /* Color del fondo del track */
+    border-radius: 20px; /* Bordes redondeados para el track */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); /* Sombra interna para mayor profundidad */
+}
+
+/* Compatibilidad con otros navegadores */
+.container {
+    scrollbar-width: thin; /* Hacer la barra más delgada */
+    scrollbar-color: #00d4ff rgba(26, 26, 26, 0.9); /* Colores para el thumb y track */
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: rgba(26, 26, 26, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    max-height: 90vh;
+}
+
+.header {
+    background-color: #333;
+    color: #00d4ff;
+    padding: 30px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.content {
+    padding: 30px;
+    line-height: 1.6;
+}
+
+.footer {
+    background: #1a1a1a;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.footer a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #00d4ff;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+iframe {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #00d4ff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.fullscreen-btn {
+    position: absolute;
+    bottom: 30px;
+    right: 10px;
+    background: #00d4ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fullscreen-btn:hover {
+    background: #00d4ff;
+}
+
+.fullscreen-btn i {
+    margin: 0;
+}
+
+/* Estilo para los tabs */
+.nav-tabs .nav-link {
+    color: #00d4ff;
+    background-color: #fdfdfd;
+    border: 1px solid #00d4ff;
+    border-radius: 5px;
+    margin-right: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-tabs .nav-link.active {
+    color: #ffffff;
+    background-color: #00d4ff;
+    border-color: #00d4ff;
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: #00d4ff;
+    color: #ffffff;
+}
+
+
+
+
+
+
+.footer a:hover {
+    background-color: #4dc7df;
+    color: #000000;
+    border: none;
+}

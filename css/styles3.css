@@ -1,0 +1,115 @@
+body {
+    font-family: 'IBM Plex Mono', monospace;
+    background-color: rgba(26, 26, 26, 0);
+    color: white;
+    margin: 0;
+    padding: 20px;
+  }/* Scrollbar personalizada */
+  .container::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+  }
+
+  .container::-webkit-scrollbar-thumb {
+    background: #00d4ff; /* Color del "pulgar" (thumb) */
+    border-radius: 50px; /* Bordes completamente redondeados */
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.6); /* Efecto de flotante con sombra */
+    border: 3px solid rgba(26, 26, 26, 0.9); /* Espacio entre el thumb y el track */
+  }
+
+  .container::-webkit-scrollbar-thumb:hover {
+    background: #00d4ff; /* Color al pasar el mouse */
+    box-shadow: 0 0 15px rgba(0, 156, 204, 0.8); /* Sombra más intensa al hacer hover */
+  }
+
+  .container::-webkit-scrollbar-track {
+    background: transparent; /* Track transparente para el efecto flotante */
+    border-radius: 50px; /* Bordes redondeados para el track */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); /* Sombra interna para mayor profundidad */
+  }
+
+  /* Compatibilidad con otros navegadores */
+  .container {
+    scrollbar-width: thin; /* Hacer la barra más delgada */
+    scrollbar-color: #00d4ff transparent; /* Colores para el thumb y track */
+  }
+
+
+  .container {
+    max-width: 900px;
+    margin: auto;
+    background: rgba(26, 26, 26, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    max-height: 90vh;
+  }
+
+  .header {
+    background-color: #00d4ff; /* Naranja vibrante */
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .content {
+    padding: 20px;
+    flex: 1; /* Hace que el contenido ocupe el espacio disponible */
+    overflow-y: auto; /* Permite desplazarse por el contenido si es necesario */
+  }
+
+  .footer {
+    background: #1a1a1a;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .footer a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .footer .btn {
+    margin: 5px;
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+
+  .footer .btn-secondary {
+    background-color: #00d4ff; /* Naranja vibrante */
+    color: #1a1a1a;
+    border: none;
+  }
+
+  .footer .btn-secondary:hover {
+    background-color: #00d4ff; /* Naranja más oscuro al hacer hover */
+  }
+
+  .footer .btn-primary {
+    background-color: #4dc7df; /* Amarillo complementario */
+    color: #1a1a1a;
+    border: none;
+  }
+
+  .footer .btn-primary:hover {
+    background-color: #4dc7df; /* Amarillo dorado al hacer hover */
+  }
+
+  #pdf-viewer {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  #pdf-navigation {
+    margin-bottom: 10px;
+  }
+
+  #pdf-canvas {
+    display: block;
+    margin: auto;
+    border: 1px solid #00d4ff; /* Borde naranja */
+  }
+.footer i {
+  margin-right: 5px;
+}

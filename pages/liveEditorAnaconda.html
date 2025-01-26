@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Editor de Anaconda</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="./css/styles.css" rel="stylesheet">
+    <style>
+      iframe {
+        width: 100%;
+        height: calc(100vh - 56px); /* Adjust height to account for header */
+        border: none;
+        margin-top: 56px; /* Height of the header */
+      }
+    </style>
+</head>
+<body>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand" href="../index.html"><i class="fas fa-globe"></i> Sento y Javier</a>
+
+    <!-- Botón para menú desplegable en pantallas pequeñas -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    !-- Menú de navegación -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html"><i class="fas fa-home"></i> Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html#projects"><i class="fas fa-folder-open"></i> Proyectos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about_us.html"><i class="fas fa-user"></i> Sobre Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="explicacion.html"><i class="fas fa-info"></i> Tecnologías</a>
+          </li>
+
+        </ul>
+
+      </ul>
+    </div>
+  </div>
+</header>
+<iframe src="https://jupyter.org/try-jupyter/lab/" title="JupyterLab Viewer"></iframe>
+
+<!-- Modal -->
+<div class="modal fade" id="notebookModal" tabindex="-1" aria-labelledby="notebookModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notebookModalLabel">Notebook Viewer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe id="viewer" src="" width="100%" height="600px" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function openNotebook(url) {
+    const viewer = document.getElementById('viewer');
+    viewer.src = url;
+    const notebookModal = new bootstrap.Modal(document.getElementById('notebookModal'));
+    notebookModal.show();
+  }
+
+</script>
+</body>
+</html>
