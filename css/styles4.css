@@ -12,14 +12,14 @@ body {
 }
 
 .container::-webkit-scrollbar-thumb {
-    background: #4CAF50; /* Color del "pulgar" (thumb) */
+    background: #00d4ff; /* Color del "pulgar" (thumb) */
     border-radius: 20px; /* Bordes completamente redondeados */
     box-shadow: 0 0 10px rgba(0, 212, 255, 0.6); /* Efecto de flotante con sombra */
     border: 3px solid rgba(26, 26, 26, 0.9); /* Espacio entre el thumb y el track */
 }
 
 .container::-webkit-scrollbar-thumb:hover {
-    background: #4CAF50; /* Color al pasar el mouse */
+    background: #00d4ff; /* Color al pasar el mouse */
     box-shadow: 0 0 15px rgba(0, 156, 204, 0.8); /* Sombra más intensa al hacer hover */
 }
 
@@ -32,7 +32,7 @@ body {
 /* Compatibilidad con otros navegadores */
 .container {
     scrollbar-width: thin; /* Hacer la barra más delgada */
-    scrollbar-color: #4CAF50 rgba(26, 26, 26, 0.9); /* Colores para el thumb y track */
+    scrollbar-color: #00d4ff rgba(26, 26, 26, 0.9); /* Colores para el thumb y track */
 }
 
 
@@ -48,9 +48,9 @@ body {
     max-height: 90vh;
 }
 .header {
-    background-color: #4CAF50;
+    background-color: #333;
 
-    color: #ffffff;
+    color: #00d4ff;
     padding: 30px;
     text-align: center;
 }
@@ -73,7 +73,7 @@ body {
 }
 
 .content h2 {
-    color: #00910d;
+    color: #00d4ff;
     margin-bottom: 15px;
     font-size: 1.8rem;
 }
@@ -88,7 +88,7 @@ body {
 }
 
 .footer {
-    background: #1a1a1a;
+    background: rgba(51, 51, 51, 0);
     padding: 15px;
     text-align: center;
     font-size: 0.9rem;
@@ -96,7 +96,7 @@ body {
 }
 
 .footer a {
-    color: #4CAF50;
+    color: #00d4ff;
     text-decoration: none;
     font-weight: bold;
 }
@@ -107,14 +107,16 @@ body {
 
 .footer .btn {
     margin: 5px;
-    font-size: 0.9rem;
+
     padding: 10px 20px;
     border-radius: 5px;
+    background-color: #4dc7df;
+    color: #000000;
 }
 
 .footer .btn-secondary {
-    background-color: #4CAF50;
-    color: #1a1a1a;
+    background-color: #4dc7df;
+    color: #000000;
     border: none;
 }
 
@@ -123,7 +125,7 @@ body {
 }
 #map {
     height: 400px; /* Altura del mapa */
-    border: 1px solid #4CAF50; /* Borde verde */
+    border: 1px solid #00d4ff; /* Borde verde */
     border-radius: 8px;
     margin-top: 10px;
 }
@@ -136,7 +138,7 @@ body {
     bottom: 50px;
     right: 10px;
     z-index: 1000;
-    background: #4CAF50; /* Verde característico */
+    background: #00d4ff; /* Verde característico */
     color: white;
     border: none;
     padding: 8px 16px;
@@ -145,7 +147,7 @@ body {
     cursor: pointer;
 }
 .fullscreen-btn:hover {
-    background: #388E3C; /* Verde más oscuro al hacer hover */
+    background: #00d4ff; /* Verde más oscuro al hacer hover */
 }
 /* Contenedor del recuadro de vista previa */
 .basemap-preview {
@@ -187,5 +189,9 @@ body {
     border-radius: 4px;
 }
 .basemap-menu img:hover {
-    border: 2px solid #007bff;
+    border: 2px solid #00d4ff;
+}
+
+.footer i {
+    margin-right: 5px;
 }

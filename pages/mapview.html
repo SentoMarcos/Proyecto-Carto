@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa Interactivo con Capas</title>
+    <title>Mapa Interactivo con Capas y Medición</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+
+    <!-- Leaflet-Geoman -->
+    <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.13.0/dist/leaflet-geoman.css" />
+    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.13.0/dist/leaflet-geoman.min.js"></script>
+    <!-- Leaflet.GeometryUtil -->
+    <script src="https://unpkg.com/leaflet-geometryutil"></script>
+
     <style>
         body {
             margin: 0;
@@ -20,7 +27,10 @@
 
         #map {
             height: 100vh;
-            width: 100%;
+            width: calc(100% - 250px); /* Ajusta al ancho del menú lateral */
+            margin-left: 250px; /* Desplaza el mapa para acomodar el menú */
+            position: relative;
+            overflow: hidden; /* Asegura que no haya desbordamientos */
         }
 
         .menu-lateral {
@@ -109,9 +119,17 @@
         <div class="menu-item" onclick="changeBaseLayer('topo')">🗻 Vista Topográfica</div>
         <div class="menu-item" onclick="changeBaseLayer('satellite')">🛰️ Vista Satélite</div>
     </div>
+
+    <div class="menu-section">
+        <div class="menu-title">Herramientas</div>
+        <div class="menu-item" onclick="toggleGeoman()">
+            <img src="https://cdn-icons-png.flaticon.com/512/1146/1146842.png" alt="Medir" />
+            <span>Medir Distancias y Áreas</span>
+        </div>
+    </div>
+
     <div class="menu-section">
         <div class="menu-item" onclick="window.location.href = '../index.html'">
-            <!--icono de back-->
             <img src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png" alt="Volver al Inicio" />
             <span>Volver al Inicio</span>
         </div>
@@ -121,15 +139,14 @@
 <div id="map"></div>
 
 <script>
+
     const practices = [
         { name: "NDWI", lat: 37.2077, lng: 9.8634, url: "https://colab.research.google.com/..." },
         { name: "Google Earth Engine", lat: 38.5371, lng: -0.7117, url: "https://colab.research.google.com/..." },
         { name: "Folium", lat: 38.5399, lng: -0.7066, url: "https://colab.research.google.com/..." },
-
-{ name: "Introducción QGIS", lat: 39.4648, lng: -6.3831, url: "https://drive.google.com/file/d/1SgFXJhKCjnG8N7-DC7hnO7MWaCH1y0O-/view?usp=drive_link" },
-{ name: "Cartografía Temática", lat: 40.4168, lng: -3.7038, url: "https://drive.google.com/file/d/1n-NFsinJ_mIFfIRaM6jl_l8IASHxMvt-/view?usp=sharing" },
-{ name: "Análisis Territorio", lat: 42.2095, lng: -4.7595, url: "https://drive.google.com/file/d/1sY-6cLBwqnmhdbmzJOqmIgzT4bS7Jezv/view?usp=sharing" }
-
+        { name: "Introducción QGIS", lat: 39.4648, lng: -6.3831, url: "https://drive.google.com/file/d/..." },
+        { name: "Cartografía Temática", lat: 40.4168, lng: -3.7038, url: "https://drive.google.com/file/d/..." },
+        { name: "Análisis Territorio", lat: 42.2095, lng: -4.7595, url: "https://drive.google.com/file/d/..." }
     ];
 
     const map = L.map('map', { zoomControl: false }).setView([38.0, -3.0], 6);
@@ -172,6 +189,108 @@
     function flyToLocation(lat, lng) {
         map.flyTo([lat, lng], 13, { duration: 2 });
     }
+
+    console.log(map.pm); // Esto debe devolver un objeto con métodos, como `addControls`.
+
+    // Verificar si Leaflet-Geoman está disponible
+    if (L.PM) {
+        console.log('Leaflet-Geoman Free: Cargado correctamente');
+
+        map.pm.addControls({
+            position: 'topright', // Posición de los controles
+            drawMarker: false, // Deshabilitar marcadores
+            drawPolyline: false, // Deshabilitar líneas
+            drawPolygon: false, // Deshabilitar polígonos
+            drawCircle: false, // Deshabilitar círculos
+            drawRectangle: false, // Deshabilitar rectángulos
+            drawText: false, // Deshabilitar herramientas de texto (si está habilitada en Geoman Premium)
+            editMode: false, // Deshabilitar edición de formas
+            dragMode: false, // Deshabilitar modo de arrastre
+            cutPolygon: false, // Deshabilitar cortar polígonos
+            removalMode: false, // Deshabilitar eliminación de formas
+            drawCircleMarker: false, // Deshabilitar marcadores de círculo
+            labelToolbar: false,  // Deshabilitar barra de etiquetas (Premium)
+            editmode: false, // Deshabilitar modo de edición (Premium)
+            attributionControl: false ,// Deshabilitar control de atribución
+            rotateMode: false // Deshabilitar modo de rotación (Premium)
+        });
+
+
+        // Función para calcular y mostrar resultados
+        const calculateMeasurements = (layer, shape) => {
+            try {
+                if (shape === 'Line') {
+                    // Calcular distancia
+                    const latlngs = layer.getLatLngs();
+                    if (Array.isArray(latlngs) && latlngs.length > 0) {
+                        const distance = L.GeometryUtil.length(layer); // Calcular distancia con GeometryUtil
+                        layer.bindPopup(`Distancia: ${(distance / 1000).toFixed(2)} km`).openPopup();
+                    }
+                } else if (shape === 'Polygon' || shape === 'Rectangle') {
+                    // Calcular área de polígonos y rectángulos
+                    const latlngs = layer.getLatLngs();
+                    if (Array.isArray(latlngs) && Array.isArray(latlngs[0]) && latlngs[0].length > 0) {
+                        const area = L.GeometryUtil.geodesicArea(latlngs[0]); // Calcular área con GeometryUtil
+                        layer.bindPopup(`Área: ${(area / 10000).toFixed(2)} ha`).openPopup();
+                    }
+                } else if (shape === 'Circle') {
+                    // Calcular área aproximada del círculo
+                    const radius = layer.getRadius(); // Radio en metros
+                    const area = Math.PI * Math.pow(radius, 2); // Área del círculo
+                    layer.bindPopup(`Área del círculo: ${(area / 10000).toFixed(2)} ha`).openPopup();
+                }
+            } catch (error) {
+                console.error('Error al calcular mediciones:', error);
+            }
+        };
+
+        // Evento al crear una nueva forma
+        map.on('pm:create', function (e) {
+            const layer = e.layer;
+            calculateMeasurements(layer, e.shape);
+        });
+
+        // Evento al editar una forma existente
+        map.on('pm:edit', function (e) {
+            e.layers.eachLayer(function (layer) {
+                const shape = layer.pm._shape; // Detectar el tipo de forma
+                calculateMeasurements(layer, shape);
+            });
+        });
+    } else {
+        console.error('Leaflet-Geoman Free no está disponible.');
+    }
+
+    // Alternar visibilidad de los controles de Leaflet-Geoman
+    let geomanActive = false; // Variable para rastrear el estado de Geoman
+
+    function toggleGeoman() {
+        if (geomanActive) {
+            // Desactivar controles de Geoman
+            map.pm.removeControls(); // Eliminar todos los controles visibles
+            geomanActive = false;
+            console.log('Controles de Geoman desactivados.');
+        } else {
+            // Activar controles de Geoman
+            map.pm.addControls({
+                position: 'topright',
+                drawMarker: false, // Deshabilitar marcadores
+                drawPolyline: true, // Habilitar líneas
+                drawPolygon: false, // Habilitar polígonos
+                drawCircle: true, // Habilitar círculos
+                drawRectangle: false, // Habilitar rectángulos
+                editMode: true, // Habilitar edición de formas
+                removalMode: true, // Habilitar eliminación de formas
+                rotateMode: true, // Deshabilitar modo de rotación
+                drawText: true, // Deshabilitar herramientas de texto (si está habilitada en Geoman Premium)
+
+            });
+            geomanActive = true;
+            console.log('Controles de Geoman activados.');
+        }
+    }
+
+
 </script>
 </body>
 </html>

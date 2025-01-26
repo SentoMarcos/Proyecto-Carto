@@ -48,7 +48,7 @@ body {
     max-height: 90vh;
 }
 .header {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #333;
 
 
 color: #00d4ff;
@@ -121,4 +121,8 @@ color: #00d4ff;
 
 .footer .btn-secondary:hover {
     background-color: #009ecc;
+}
+
+.footer i {
+    margin-right: 5px;
 }

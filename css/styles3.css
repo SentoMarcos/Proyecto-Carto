@@ -1,6 +1,6 @@
 body {
     font-family: 'IBM Plex Mono', monospace;
-    background-color: #1a1a1a;
+    background-color: rgba(26, 26, 26, 0);
     color: white;
     margin: 0;
     padding: 20px;
@@ -10,14 +10,14 @@ body {
   }
 
   .container::-webkit-scrollbar-thumb {
-    background: #FF5733; /* Color del "pulgar" (thumb) */
+    background: #00d4ff; /* Color del "pulgar" (thumb) */
     border-radius: 50px; /* Bordes completamente redondeados */
     box-shadow: 0 0 10px rgba(0, 212, 255, 0.6); /* Efecto de flotante con sombra */
     border: 3px solid rgba(26, 26, 26, 0.9); /* Espacio entre el thumb y el track */
   }
 
   .container::-webkit-scrollbar-thumb:hover {
-    background: #FF5733; /* Color al pasar el mouse */
+    background: #00d4ff; /* Color al pasar el mouse */
     box-shadow: 0 0 15px rgba(0, 156, 204, 0.8); /* Sombra más intensa al hacer hover */
   }
 
@@ -30,7 +30,7 @@ body {
   /* Compatibilidad con otros navegadores */
   .container {
     scrollbar-width: thin; /* Hacer la barra más delgada */
-    scrollbar-color: #FF5733 transparent; /* Colores para el thumb y track */
+    scrollbar-color: #00d4ff transparent; /* Colores para el thumb y track */
   }
 
 
@@ -45,7 +45,7 @@ body {
   }
 
   .header {
-    background-color: #FF5733; /* Naranja vibrante */
+    background-color: #00d4ff; /* Naranja vibrante */
     color: white;
     padding: 20px;
     text-align: center;
@@ -77,23 +77,23 @@ body {
   }
 
   .footer .btn-secondary {
-    background-color: #FF5733; /* Naranja vibrante */
+    background-color: #00d4ff; /* Naranja vibrante */
     color: #1a1a1a;
     border: none;
   }
 
   .footer .btn-secondary:hover {
-    background-color: #E64A19; /* Naranja más oscuro al hacer hover */
+    background-color: #00d4ff; /* Naranja más oscuro al hacer hover */
   }
 
   .footer .btn-primary {
-    background-color: #FFC300; /* Amarillo complementario */
+    background-color: #4dc7df; /* Amarillo complementario */
     color: #1a1a1a;
     border: none;
   }
 
   .footer .btn-primary:hover {
-    background-color: #FFA500; /* Amarillo dorado al hacer hover */
+    background-color: #4dc7df; /* Amarillo dorado al hacer hover */
   }
 
   #pdf-viewer {
@@ -108,5 +108,8 @@ body {
   #pdf-canvas {
     display: block;
     margin: auto;
-    border: 1px solid #FF5733; /* Borde naranja */
+    border: 1px solid #00d4ff; /* Borde naranja */
   }
+.footer i {
+  margin-right: 5px;
+}

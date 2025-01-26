@@ -5,7 +5,8 @@ body {
     margin: 0;
     padding: 20px;
     overflow: hidden;
-}/* Scrollbar personalizada */
+}
+
 /* Scrollbar personalizada */
 .container::-webkit-scrollbar {
     width: 12px; /* Ancho de la barra de desplazamiento */
@@ -35,9 +36,6 @@ body {
     scrollbar-color: #00d4ff rgba(26, 26, 26, 0.9); /* Colores para el thumb y track */
 }
 
-
-
-
 .container {
     max-width: 900px;
     margin: auto;
@@ -47,11 +45,10 @@ body {
     overflow: auto;
     max-height: 90vh;
 }
+
 .header {
-    background-color: rgba(0, 0, 0, 0.8);
-
-
-color: #00d4ff;
+    background-color: #333;
+    color: #00d4ff;
     padding: 30px;
     text-align: center;
 }
@@ -121,4 +118,17 @@ color: #00d4ff;
 
 .footer .btn-secondary:hover {
     background-color: #009ecc;
+}
+.nav-tabs .nav-link {
+    color: #00d4ff;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: none;
+    border-radius: 0;
+}
+.nav-tabs .nav-item {
+    list-style-type: none;
+}
+.nav-tabs .nav-link.active {
+    color: #1a1a1a;
+    background-color: #00d4ff;
 }

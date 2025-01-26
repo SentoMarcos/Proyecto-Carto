@@ -64,17 +64,16 @@ header {
 }
 
 
-
 /* General styles for the toggle button */
 .menu-toggle {
     position: fixed;
     top: 50%;
-    left: 0; /* Default position: right */
+    left: 0; /* Default position: left */
     transform: translateY(-50%);
     background-color: #00d4ff;
     color: white;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,11 +81,13 @@ header {
     cursor: pointer;
     z-index: 1001;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, right 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .menu-toggle:hover {
     background-color: #009ecc;
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Adjust the toggle button position when the sidebar is open */
@@ -96,10 +97,8 @@ header {
 
 /* Icon styles */
 .menu-toggle i {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
-
-
 /* Menú lateral */
 .sidebar {
     padding-top: 67px !important;
@@ -659,4 +658,60 @@ body.light-theme #searchInput:focus {
     border-color: #005f99;
     background-color: rgba(0, 95, 153, 0.1);
     box-shadow: 0 4px 12px rgba(0, 95, 153, 0.4);
+}
+
+
+.scroll-down {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.scroll-down a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+}
+
+.scroll-down span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: #4dc7df; /* Your preferred shade of blue */
+    margin-bottom: 5px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(77, 199, 223, 0.5); /* Adjusted to match the blue color */
+    animation: scroll 1.5s infinite;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-down span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.scroll-down span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.scroll-down a:hover span {
+    background: #007bff; /* A darker shade of blue for hover effect */
+    transform: scale(1.2);
+}
+
+@keyframes scroll {
+    0% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
 }

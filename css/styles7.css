@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #e8f5e900;
+    background-color: rgba(232, 245, 233, 0);
     color: #2e3b2d;
     margin: 0;
     padding: 20px;
@@ -23,7 +23,7 @@ body {
 }
 
 .header {
-    background-color: #2e7d32;
+    background-color: #333;
     color: white;
     padding: 30px;
     text-align: center;
@@ -48,7 +48,7 @@ body {
 }
 
 .content h2 {
-    color: #1b5e20;
+    color: #00d4ff;
     margin-bottom: 15px;
     font-size: 1.8rem;
 }
@@ -70,7 +70,7 @@ body {
 }
 
 .footer a {
-    color: #2e7d32;
+    color: #00d4ff;
     text-decoration: none;
     font-weight: bold;
 }
@@ -87,21 +87,21 @@ body {
 }
 
 .footer .btn-primary {
-    background-color: #2e7d32;
-    color: white;
+    background-color: #00d4ff;
+    color: #000000;
     border: none;
 }
 
 .footer .btn-primary:hover {
-    background-color: #1b5e20;
+    background-color: #00d4ff;
 }
 
 .footer .btn-secondary {
-    background-color: #a5d6a7;
-    color: #2e7d32;
+    background-color: #00d4ff;
+    color: #000000;
     border: none;
 }
 
 .footer .btn-secondary:hover {
-    background-color: #81c784;
+    background-color: #00d4ff;
 }
